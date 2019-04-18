@@ -4,6 +4,26 @@ using UnityEngine;
 
 public class CDataController : MonoBehaviour
 {
+
+    private static CDataController instance;
+
+
+    public static CDataController GetInstance()
+    {
+        if(instance == null)
+        {
+            instance = FindObjectOfType<CDataController>();
+
+            if(instance == null)
+            {
+                GameObject container = new GameObject("CDataController");
+                instance = container.AddComponent<CDataController>();
+            }
+        }
+        return instance;
+    }
+
+
     [SerializeField]
     private int m_gold = 0;
 
@@ -49,6 +69,12 @@ public class CDataController : MonoBehaviour
     {
         m_goldPerClick = newGoldPerClick;
         PlayerPrefs.SetInt("GoldPerClick", m_goldPerClick);
+    }
+
+    public void AddGoldPerClick(int newGoldPerClick)
+    {
+        m_goldPerClick += newGoldPerClick;
+        SetGoldPerClick(m_goldPerClick);
     }
 
 }
