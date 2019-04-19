@@ -25,9 +25,7 @@ public class CUpgrade : MonoBehaviour
 
     void Start()
     {
-        currentCost = startCurrentCost;
-        level = 1;
-        goldByUpgrade = startGoldByUpgrade;
+        CDataController.GetInstance().LoadUpgradeButton(this);
         UpdateUI();
     }
 
@@ -41,6 +39,7 @@ public class CUpgrade : MonoBehaviour
 
             UpdateUpgrade();
             UpdateUI();
+            CDataController.GetInstance().SaveUpgradeButton(this);
         }
     }
 
